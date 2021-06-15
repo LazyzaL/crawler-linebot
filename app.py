@@ -40,11 +40,7 @@ def callback():
 def show(event):
     hentai = crawler_for_window.view(event.message.text)
 
-    def cover():
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text=hentai.getInfo()[0]),
-        )
+    reply_arr = []
 
     if event.source.user_id != "Udeadbeefdeadbeefdeadbeefdeadbeef":
         if hentai.checkConnection() == False:
@@ -53,12 +49,13 @@ def show(event):
                 TextSendMessage(text='查無此本')
             )
         else:
+            reply_arr.append(TextSendMessage(
+                text='https://nhentai.net/g/' + event.message.text + '/'),)
+            reply_arr.append(TextSendMessage(text=hentai.getInfo()[0]))
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text='https://nhentai.net/g/' +
-                                event.message.text + '/'),
+                reply_arr
             )
-            cover()
 
 
 if __name__ == "__main__":
