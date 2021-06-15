@@ -39,7 +39,6 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def show(event):
     hentai = crawler_for_linebot.book(event.message.text)
-    tagsearch = crawler_for_linebot.tag(event.message.text)
 
     reply_arr = []
 
@@ -51,12 +50,6 @@ def show(event):
                     text='歡迎使用nhentai爬蟲機器人\n只需要輸入本子的號碼，就可以搜尋到該本子的資訊\n如果不知道想看什麼，輸入-1就可以搜尋隨機本子')
             )
 
-        if tagsearch.checkConnection() == False:
-            line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text='查無此標籤。\n請確認輸入是否正確')
-            )
-
         if event.message.text == '-1':
             while True:
                 hentai.randombook()
@@ -66,7 +59,8 @@ def show(event):
         if hentai.checkConnection() == False:
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text='查無此本。\n請確認輸入是否正確，如果要隨機產生本子，輸入-1即可')
+                TextSendMessage(text='查無此本: ' + event.message.text +
+                                '。\n請確認輸入是否正確，如果要隨機產生本子，輸入-1即可')
             )
         else:
             reply_arr.append(TextSendMessage(
