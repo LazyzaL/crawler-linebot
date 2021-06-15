@@ -54,7 +54,7 @@ def show(event):
                 original_content_url=hentai.getInfo()[0],
                 preview_image_url=hentai.getInfo()[0]))
             reply_arr.append(TextSendMessage(
-                text='主標題(Main Title):\n{}\n\n副標題(Sub Title):\n{}\n\n原作(Parodies):\n{}\n\n角色(Characters):\n{}\n\n標籤(Tags):\n{}\n\n作者(Artists):\n{}\n\n語言(Languages):\n{}\n\n本子類型(Catogories):\n{}\n\n頁數(Pages):\n{}'.format(
+                text='***若欄位為空白，表示網站亦無該資訊***\n\n主標題(Main Title):\n{}\n\n副標題(Sub Title):\n{}\n\n原作(Parodies):\n{}\n\n角色(Characters):\n{}\n\n標籤(Tags):\n{}\n\n作者(Artists):\n{}\n\n語言(Languages):\n{}\n\n本子類型(Catogories):\n{}\n\n頁數(Pages):\n{}'.format(
                     hentai.getInfo()[1],
                     hentai.getInfo()[2],
                     hentai.getInfo()[3],
@@ -64,6 +64,7 @@ def show(event):
                     hentai.getInfo()[7],
                     hentai.getInfo()[8],
                     hentai.getInfo()[9])))
+            reply_arr.append(TextSendMessage(text='若需查詢下一本，請直接輸入號碼'))
             line_bot_api.reply_message(
                 event.reply_token,
                 reply_arr
