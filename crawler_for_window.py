@@ -88,7 +88,10 @@ class view:
                 artists.append(s.text)
         if(info[5]):
             for s in info[5]:
-                languages.append(s.text)
+                try:
+                    languages.append(translate.langDict[s.text])
+                except:
+                    languages.append(s.text)
         if(info[6]):
             for s in info[6]:
                 catogories.append(s.text)
