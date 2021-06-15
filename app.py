@@ -51,8 +51,8 @@ def show(event):
             reply_arr.append(TextSendMessage(
                 text='https://nhentai.net/g/' + event.message.text + '/'))
             reply_arr.append(ImageSendMessage(
-                originalContentUrl=hentai.getInfo()[0],
-                previewImageUrl=hentai.getInfo()[0]))
+                original_content_url=hentai.getInfo()[0],
+                preview_image_url=hentai.getInfo()[0]))
             line_bot_api.reply_message(
                 event.reply_token,
                 reply_arr
