@@ -47,13 +47,14 @@ def show(event):
                 TextSendMessage(text='查無此本')
             )
         else:
+            info = hentai.getInfo()
             reply_arr.append(TextSendMessage(
                 text='https://nhentai.net/g/' + event.message.text + '/'))
             reply_arr.append(ImageSendMessage(
-                original_content_url=hentai.getInfo()[0],
-                preview_image_url=hentai.getInfo()[0]))
+                original_content_url=info[0],
+                preview_image_url=info[0]))
             reply_arr.append(TextSendMessage(
-                text='主標題:\n{}\n\n副標題:\n{}\n'.format(hentai.getInfo()[1], hentai.getInfo()[2])))
+                text='主標題:\n{}\n\n副標題:\n{}\n\n原作:\n{}\n'.format(info[1], info()[2], s.text for s in info[3][2])))
             line_bot_api.reply_message(
                 event.reply_token,
                 reply_arr

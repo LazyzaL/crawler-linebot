@@ -126,34 +126,3 @@ class view:
         self.pages = html.find_all('span', 'tags')[7].find('span', 'name').text
 
         return [cover, main_title, sub_title, info, self.pages]
-
-    def download(self):
-        headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36'
-        }
-        bookPath = os.path.abspath('./' + self.name)
-        if not os.path.isdir(bookPath):
-            os.mkdir(bookPath)
-            print('新增資料夾')
-
-        for i in range(1, int(self.pages) + 1):
-            url = self.url + str(i)
-            req = ur.Request(url, headers=headers)
-            html = soup(ur.urlopen(req).read().decode('utf-8'), "html.parser")
-
-            imgurl = html.select('section#image-container img')[0].get('src')
-            ur.urlretrieve(imgurl, os.path.join(
-                bookPath, str(i) + '.jpg'), reporthook=None, data=None)
-            print('已新增第' + str(i) + '頁')
-            time.sleep(1)
-
-    def start(self):
-        self.setLink()
-
-        while True:
-            if self.checkConnection() == True:
-                break
-            else:
-                self.setLink()
-
-        self.printInfo()
