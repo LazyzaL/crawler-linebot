@@ -52,6 +52,8 @@ def show(event):
             reply_arr.append(ImageSendMessage(
                 original_content_url=hentai.getInfo()[0],
                 preview_image_url=hentai.getInfo()[0]))
+            reply_arr.append(TextSendMessage(
+                text='主標題:\n{}\n\n副標題:\n{}\n'.format(hentai.getInfo()[1], hentai.getInfo[2])))
             line_bot_api.reply_message(
                 event.reply_token,
                 reply_arr
