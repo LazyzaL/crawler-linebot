@@ -49,11 +49,11 @@ def show(event):
         if hentai.checkConnection() == False:
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text='查無此本')
+                TextSendMessage(text='查無此本，請確認輸入是否正確，如果要隨機產生本子，輸入-1即可')
             )
         else:
             reply_arr.append(TextSendMessage(
-                text='https://nhentai.net/g/' + event.message.text + '/'))
+                text='https://nhentai.net/g/' + hentai.name + '/'))
             reply_arr.append(ImageSendMessage(
                 original_content_url=hentai.getInfo()[0],
                 preview_image_url=hentai.getInfo()[0]))
