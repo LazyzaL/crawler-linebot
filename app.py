@@ -49,7 +49,7 @@ def show(event):
         if hentai.checkConnection() == False:
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text='查無此本，請確認輸入是否正確，如果要隨機產生本子，輸入-1即可')
+                TextSendMessage(text='查無此本。\n請確認輸入是否正確，如果要隨機產生本子，輸入-1即可。')
             )
         else:
             reply_arr.append(TextSendMessage(
@@ -69,7 +69,7 @@ def show(event):
                     hentai.getInfo()[8],
                     hentai.getInfo()[9])))
             reply_arr.append(TextSendMessage(
-                text='若需查詢下一本，請直接輸入號碼，輸入-1可隨機搜尋本子'))
+                text='若需查詢下一本，請直接輸入號碼，輸入-1可隨機搜尋本子。'))
             line_bot_api.reply_message(
                 event.reply_token,
                 reply_arr
