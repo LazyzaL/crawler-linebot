@@ -37,21 +37,6 @@ def callback():
 
 
 @handler.add(MessageEvent, message=TextMessage)
-def pretty_echo(event):
-    if event.source.user_id != "Udeadbeefdeadbeefdeadbeefdeadbeef":
-        pretty_note = '♫♪♬'
-        pretty_text = ''
-        for i in event.message.text:
-            pretty_text += i
-            pretty_text += random.choice(pretty_note)
-
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text=pretty_text)
-        )
-
-
-@handler.add(MessageEvent, message=TextMessage)
 def show(event):
     if event.source.user_id != "Udeadbeefdeadbeefdeadbeefdeadbeef":
         hentai = crawler_for_window.view(event.message.text)
@@ -63,7 +48,9 @@ def show(event):
         else:
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text=hentai.getInfo()[0])
+                TextSendMessage(text='https://nhentai.net/g/' +
+                                event.message.text + '/'),
+                TextSendMessage(text=hentai.getInfo()[0]),
             )
 
 
