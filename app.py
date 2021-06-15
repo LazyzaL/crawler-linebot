@@ -38,53 +38,66 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def show(event):
-    hentai = crawler_for_linebot.book(event.message.text)
+    def booksearch():
+        hentai = crawler_for_linebot.book(event.message.text)
 
-    reply_arr = []
+        reply_arr = []
 
-    if event.source.user_id != "Udeadbeefdeadbeefdeadbeefdeadbeef":
-        if event.message.text == '使用說明':
-            line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(
-                    text='歡迎使用nhentai爬蟲機器人\n只需要輸入本子的號碼，就可以搜尋到該本子的資訊\n如果不知道想看什麼，輸入-1就可以搜尋隨機本子')
-            )
+        if event.source.user_id != "Udeadbeefdeadbeefdeadbeefdeadbeef":
+            if event.message.text == '使用說明':
+                line_bot_api.reply_message(
+                    event.reply_token,
+                    TextSendMessage(
+                        text='歡迎使用nhentai爬蟲機器人\n只需要輸入本子的號碼，就可以搜尋到該本子的資訊\n如果不知道想看什麼，輸入-1就可以搜尋隨機本子')
+                )
 
-        if event.message.text == '-1':
-            while True:
-                hentai.randombook()
-                if hentai.checkConnection() == True:
-                    break
+            if event.message.text == '-1':
+                while True:
+                    hentai.randombook()
+                    if hentai.checkConnection() == True:
+                        break
 
-        if hentai.checkConnection() == False:
-            line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text='查無此本: ' + event.message.text +
-                                '。\n請確認輸入是否正確，如果要隨機產生本子，輸入-1即可')
-            )
-        else:
-            reply_arr.append(TextSendMessage(
-                text='https://nhentai.net/g/' + hentai.name + '/'))
-            reply_arr.append(ImageSendMessage(
-                original_content_url=hentai.getInfo()[0],
-                preview_image_url=hentai.getInfo()[0]))
-            reply_arr.append(TextSendMessage(
-                text='***若欄位為空白，表示網站亦無該資訊***\n\n主標題(Main Title):\n{}\n\n副標題(Sub Title):\n{}\n\n原作(Parodies):\n{}\n\n角色(Characters):\n{}\n\n標籤(Tags):\n{}\n\n作者(Artists):\n{}\n\n語言(Languages):\n{}\n\n本子類型(Catogories):\n{}\n\n頁數(Pages):\n{}'.format(
-                    hentai.getInfo()[1],
-                    hentai.getInfo()[2],
-                    hentai.getInfo()[3],
-                    hentai.getInfo()[4],
-                    hentai.getInfo()[5],
-                    hentai.getInfo()[6],
-                    hentai.getInfo()[7],
-                    hentai.getInfo()[8],
-                    hentai.getInfo()[9])))
-            reply_arr.append(TextSendMessage(
-                text='若需查詢下一本，請直接輸入號碼，輸入-1可隨機搜尋本子。'))
-            line_bot_api.reply_message(
-                event.reply_token,
-                reply_arr
-            )
+            if hentai.checkConnection() == False:
+                line_bot_api.reply_message(
+                    event.reply_token,
+                    TextSendMessage(
+                        text='查無此本: ' + event.message.text + '。\n請確認輸入是否正確，如果要隨機產生本子，輸入-1即可')
+                )
+            else:
+                reply_arr.append(TextSendMessage(
+                    text='https://nhentai.net/g/' + hentai.name + '/'))
+                reply_arr.append(ImageSendMessage(
+                    original_content_url=hentai.getInfo()[0],
+                    preview_image_url=hentai.getInfo()[0]))
+                reply_arr.append(TextSendMessage(
+                    text='***若欄位為空白，表示網站亦無該資訊***\n\n主標題(Main Title):\n{}\n\n副標題(Sub Title):\n{}\n\n原作(Parodies):\n{}\n\n角色(Characters):\n{}\n\n標籤(Tags):\n{}\n\n作者(Artists):\n{}\n\n語言(Languages):\n{}\n\n本子類型(Catogories):\n{}\n\n頁數(Pages):\n{}'.format(
+                        hentai.getInfo()[1],
+                        hentai.getInfo()[2],
+                        hentai.getInfo()[3],
+                        hentai.getInfo()[4],
+                        hentai.getInfo()[5],
+                        hentai.getInfo()[6],
+                        hentai.getInfo()[7],
+                        hentai.getInfo()[8],
+                        hentai.getInfo()[9])))
+                reply_arr.append(TextSendMessage(
+                    text='若需查詢下一本，請直接輸入號碼，輸入-1可隨機搜尋本子。'))
+                line_bot_api.reply_message(
+                    event.reply_token,
+                    reply_arr
+                )
+
+    def tagsearch():
+        hentai = crawler_for_linebot.tag(event.message.text)
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text='hi')
+        )
+
+    if float(event.message.text):
+        booksearch()
+    else:
+        tagsearch()
 
 
 if __name__ == "__main__":
