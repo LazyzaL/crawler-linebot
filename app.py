@@ -53,9 +53,6 @@ def show(event):
             reply_arr.append(ImageSendMessage(
                 original_content_url=info[0],
                 preview_image_url=info[0]))
-            reply_arr.append(TextSendMessage(
-                text='主標題:\n{}\n副標題:{}'.format(info[1], info[2])
-            ))
             line_bot_api.reply_message(
                 event.reply_token,
                 reply_arr
