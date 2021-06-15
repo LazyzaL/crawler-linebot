@@ -50,7 +50,6 @@ def show(event):
                 event.reply_token,
                 TextSendMessage(text='https://nhentai.net/g/' +
                                 event.message.text + '/'),
-                TextSendMessage(text=hentai.getInfo()[0]),
             )
 
 
