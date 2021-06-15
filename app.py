@@ -38,7 +38,6 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def show(event):
     hentai = crawler_for_window.view(event.message.text)
-    info = hentai.getInfo()
     reply_arr = []
 
     if event.source.user_id != "Udeadbeefdeadbeefdeadbeefdeadbeef":
@@ -51,8 +50,8 @@ def show(event):
             reply_arr.append(TextSendMessage(
                 text='https://nhentai.net/g/' + event.message.text + '/'))
             reply_arr.append(ImageSendMessage(
-                original_content_url=info[0],
-                preview_image_url=info[0]))
+                original_content_url=hentai.getInfo()[0],
+                preview_image_url=hentai.getInfo()[0]))
             line_bot_api.reply_message(
                 event.reply_token,
                 reply_arr
