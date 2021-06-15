@@ -5,6 +5,7 @@ from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
 import configparser
+import random
 import crawler_for_window
 
 app = Flask(__name__)
@@ -33,6 +34,21 @@ def callback():
         abort(400)
 
     return 'OK'
+
+
+@handler.add(MessageEvent, message=TextMessage)
+def pretty_echo(event):
+    if event.source.user_id != "Udeadbeefdeadbeefdeadbeefdeadbeef":
+        pretty_note = '♫♪♬'
+        pretty_text = ''
+        for i in event.message.text:
+            pretty_text += i
+            pretty_text += random.choice(pretty_note)
+
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=pretty_text)
+        )
 
 
 @handler.add(MessageEvent, message=TextMessage)
