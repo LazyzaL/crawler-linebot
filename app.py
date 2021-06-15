@@ -38,8 +38,15 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def show(event):
+    hentai = crawler_for_window.view(event.message.text)
+
+    def cover():
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=hentai.getInfo()[0]),
+        )
+
     if event.source.user_id != "Udeadbeefdeadbeefdeadbeefdeadbeef":
-        hentai = crawler_for_window.view(event.message.text)
         if hentai.checkConnection() == False:
             line_bot_api.reply_message(
                 event.reply_token,
@@ -51,6 +58,7 @@ def show(event):
                 TextSendMessage(text='https://nhentai.net/g/' +
                                 event.message.text + '/'),
             )
+            cover()
 
 
 if __name__ == "__main__":
