@@ -5,7 +5,7 @@ from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
 import configparser
-import random
+import crawler_for_window
 
 app = Flask(__name__)
 
@@ -34,27 +34,21 @@ def callback():
 
     return 'OK'
 
-# 學你說話
-
 
 @handler.add(MessageEvent, message=TextMessage)
-def pretty_echo(event):
-
+def show(event):
     if event.source.user_id != "Udeadbeefdeadbeefdeadbeefdeadbeef":
-
-        # Phoebe 愛唱歌
-        pretty_note = '♫♪♬'
-        pretty_text = ''
-
-        for i in event.message.text:
-
-            pretty_text += i
-            pretty_text += random.choice(pretty_note)
-
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text=pretty_text)
-        )
+        hentai = crawler_for_window.view(event.message.text)
+        if hentai.checkConnection() == False:
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text='查無此本')
+            )
+        else:
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text=hentai.getInfo()[0])
+            )
 
 
 if __name__ == "__main__":
