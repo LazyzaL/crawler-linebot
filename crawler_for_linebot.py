@@ -25,21 +25,6 @@ class view:
             print("\n查無此號碼：" + self.name)
             return False
 
-    def setLink(self):
-        while True:
-            self.name = input("\n輸入神的語言（最多6位數，輸入-1產生隨機本子）：")
-            if len(self.name) <= 6:
-                break
-            else:
-                print("\n輸入格式錯誤")
-
-        if self.name == "-1":
-            while True:
-                self.randombook()
-                if self.checkConnection() == True:
-                    break
-                print("尋找下一本")
-
     def getInfo(self):
         headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36'
@@ -78,7 +63,8 @@ class view:
         if(info[2]):
             for s in info[2]:
                 try:
-                    tags.append(translate.tagsDict[s.text])
+                    tags.append(
+                        translate.tagsDict[s.text] + '(' + s.text + ')')
                 except:
                     tags.append(s.text)
         if(info[3]):
