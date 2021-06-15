@@ -98,16 +98,16 @@ class view:
         return [cover,
                 main_title,
                 sub_title,
-                str(parodies).replace('[', '').replace(
-                    ']', '').replace(', ', '\n'),
+                str(parodies).replace(
+                    '[', '').replace(']', '').replace(', ', '\n').replace('\'', ''),
                 str(characters).replace(
-                    '[', '').replace(']', '').replace(', ', '\n'),
-                str(tags).replace('[', '').replace(
-                    ']', '').replace(', ', '\n'),
-                str(artists).replace('[', '').replace(
-                    ']', '').replace(', ', '\n'),
+                    '[', '').replace(']', '').replace(', ', '\n').replace('\'', ''),
+                str(tags).replace(
+                    '[', '').replace(']', '').replace(', ', '\n').replace('\'', ''),
+                str(artists).replace(
+                    '[', '').replace(']', '').replace(', ', '\n').replace('\'', ''),
                 str(languages).replace(
-                    '[', '').replace(']', '').replace(', ', '\n'),
+                    '[', '').replace(']', '').replace(', ', '\n').replace('\'', ''),
                 str(catogories).replace(
-                    '[', '').replace(']', '').replace(', ', '\n'),
+                    '[', '').replace(']', '').replace(', ', '\n').replace('\'', ''),
                 pages]
