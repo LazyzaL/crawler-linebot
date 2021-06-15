@@ -3,9 +3,8 @@ import os
 from flask import Flask, request, abort
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
-from linebot.models import MessageEvent, TextMessage, TextSendMessage
+from linebot.models import MessageEvent, TextMessage, TextSendMessage, ImageSendMessage
 import configparser
-import random
 import crawler_for_window
 
 app = Flask(__name__)
@@ -50,8 +49,10 @@ def show(event):
             )
         else:
             reply_arr.append(TextSendMessage(
-                text='https://nhentai.net/g/' + event.message.text + '/'),)
-            reply_arr.append(TextSendMessage(text=hentai.getInfo()[0]))
+                text='https://nhentai.net/g/' + event.message.text + '/'))
+            reply_arr.append(ImageSendMessage(
+                original_content_url=hentai.getInfo()[0]),
+                preview_image_url=hentai.getInfo()[0])
             line_bot_api.reply_message(
                 event.reply_token,
                 reply_arr
