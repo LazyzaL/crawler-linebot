@@ -1,11 +1,10 @@
 from __future__ import unicode_literals
-import os
 from flask import Flask, request, abort
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage, ImageSendMessage
 import configparser
-import crawler_for_window
+import crawler_for_linebot
 
 app = Flask(__name__)
 
@@ -37,11 +36,16 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def show(event):
-    hentai = crawler_for_window.view(event.message.text)
+    hentai = crawler_for_linebot.view(event.message.text)
     reply_arr = []
-    parodies = []
 
     if event.source.user_id != "Udeadbeefdeadbeefdeadbeefdeadbeef":
+        if event.message.text == '-1':
+            while True:
+                hentai.randombook()
+                if hentai.checkConnection() == True:
+                    break
+
         if hentai.checkConnection() == False:
             line_bot_api.reply_message(
                 event.reply_token,
@@ -64,7 +68,8 @@ def show(event):
                     hentai.getInfo()[7],
                     hentai.getInfo()[8],
                     hentai.getInfo()[9])))
-            reply_arr.append(TextSendMessage(text='若需查詢下一本，請直接輸入號碼'))
+            reply_arr.append(TextSendMessage(
+                text='若需查詢下一本，請直接輸入號碼，輸入-1可隨機搜尋本子'))
             line_bot_api.reply_message(
                 event.reply_token,
                 reply_arr
