@@ -53,7 +53,7 @@ def show(event):
                 original_content_url=hentai.getInfo()[0],
                 preview_image_url=hentai.getInfo()[0]))
             reply_arr.append(TextSendMessage(
-                text='主標題:\n{}\n\n副標題:\n{}\n\n原作:\n{}\n'.format(hentai.getInfo()[1], hentai.getInfo()[2], s.text for s in hentai.getInfo()[3][2])))
+                text='主標題:\n{}\n\n副標題:\n{}\n\n原作:\n{}\n'.format(hentai.getInfo()[1], hentai.getInfo()[2], hentai.getInfo()[3][2][0].text)))
             line_bot_api.reply_message(
                 event.reply_token,
                 reply_arr
