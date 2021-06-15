@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup as soup
 import translate
 
 
-class view:
+class book:
     def __init__(self, name):
         self.name = name
         self.url = ""
@@ -22,7 +22,6 @@ class view:
         if resp.status_code == 200:
             return True
         else:
-            print("\n查無此號碼：" + self.name)
             return False
 
     def getInfo(self):
@@ -98,3 +97,21 @@ class view:
                 str(catogories).replace(
                     '[', '').replace(']', '').replace(', ', '\n').replace('\'', ''),
                 pages]
+
+
+class tag:
+    def __init__(self, tag):
+        self.tag = tag
+        self.url = ""
+
+    def checkConnection(self):
+        self.tag = str(self.tag).replace(' ', '-')
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36'
+        }
+        self.url = "https://nhentai.net/tag/" + self.name + "/"
+        resp = requests.get(self.url, headers)
+        if resp.status_code == 200:
+            return True
+        else:
+            return False

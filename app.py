@@ -1,3 +1,7 @@
+# 歡迎使用這個LINE Bot
+# 進入LINE應用程式，於官方帳號頁面搜尋
+# @717dfpbz
+# @也必須輸入
 from __future__ import unicode_literals
 from flask import Flask, request, abort
 from linebot import LineBotApi, WebhookHandler
@@ -8,7 +12,6 @@ import crawler_for_linebot
 
 app = Flask(__name__)
 
-# LINE 聊天機器人的基本資料
 config = configparser.ConfigParser()
 config.read('config.ini')
 
@@ -16,7 +19,6 @@ line_bot_api = LineBotApi(config.get('line-bot', 'channel_access_token'))
 handler = WebhookHandler(config.get('line-bot', 'channel_secret'))
 
 
-# 接收 LINE 的資訊
 @app.route("/callback", methods=['POST'])
 def callback():
     signature = request.headers['X-Line-Signature']
@@ -36,7 +38,7 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def show(event):
-    hentai = crawler_for_linebot.view(event.message.text)
+    hentai = crawler_for_linebot.book(event.message.text)
     reply_arr = []
 
     if event.source.user_id != "Udeadbeefdeadbeefdeadbeefdeadbeef":
@@ -46,6 +48,17 @@ def show(event):
                 TextSendMessage(
                     text='歡迎使用nhentai爬蟲機器人\n只需要輸入本子的號碼，就可以搜尋到該本子的資訊\n如果不知道想看什麼，輸入-1就可以搜尋隨機本子')
             )
+
+        try:
+            float(event.message.text)
+        except:
+            tagsearch = crawler_for_linebot.tag(event.message.text)
+
+            if tagsearch.checkConnection() == False:
+                line_bot_api.reply_message(
+                    event.reply_token,
+                    TextSendMessage(text='查無此標籤。\n請確認輸入是否正確')
+                )
 
         if event.message.text == '-1':
             while True:
