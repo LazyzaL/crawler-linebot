@@ -94,7 +94,7 @@ def show(event):
             TextSendMessage(text='hi')
         )
 
-    if float(event.message.text):
+    if str(event.message.text).isdigit():
         booksearch()
     else:
         tagsearch()
