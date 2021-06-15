@@ -39,6 +39,8 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def show(event):
     hentai = crawler_for_linebot.book(event.message.text)
+    tagsearch = crawler_for_linebot.tag(event.message.text)
+
     reply_arr = []
 
     if event.source.user_id != "Udeadbeefdeadbeefdeadbeefdeadbeef":
@@ -52,8 +54,6 @@ def show(event):
         try:
             float(event.message.text)
         except:
-            tagsearch = crawler_for_linebot.tag(event.message.text)
-
             if tagsearch.checkConnection() == False:
                 line_bot_api.reply_message(
                     event.reply_token,
