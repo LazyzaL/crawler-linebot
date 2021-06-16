@@ -130,5 +130,15 @@ class tag:
             if len(l) >= 3 and l[1] == 'g' and l[2] == '/':
                 urllist.append('https://nhentai.net' + url.get('href'))
 
+        i = 0
+        for title in html.find_all('div', 'caption'):
+            urllist.insert(i*2+1, title.text + '\n')
+            i += 1
+        print(urllist)
         return(str(urllist).replace('[', '').replace(
             ']', '').replace(', ', '\n').replace('\'', ''))
+
+
+n = tag('paizuri')
+n.checkConnection()
+n.getInfo()
