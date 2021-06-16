@@ -74,7 +74,7 @@ def show(event):
                         hentai.getInfo()[8],
                         hentai.getInfo()[9])))
                 reply_arr.append(TextSendMessage(
-                    text='若需查詢下一本，請直接輸入號碼，輸入-1可隨機搜尋本子。'))
+                    text='若需繼續查詢，請直接輸入文字或號碼，輸入-1可隨機搜尋本子。'))
                 line_bot_api.reply_message(
                     event.reply_token,
                     reply_arr
@@ -89,11 +89,14 @@ def show(event):
             line_bot_api.reply_message(
                 event.reply_token,
                 TextSendMessage(
-                    text='查無此標籤，亦無此本子:' + event.message.text + '。\n請確認輸入是否正確，並重新輸入')
+                    text='查無此標籤，亦無此本子:' + event.message.text + '。\n請確認輸入是否正確，並重新輸入，如果要隨機產生本子，輸入-1即可')
             )
         else:
             reply_arr.append(TextSendMessage(
                 text=hentai.getInfo()))
+            reply_arr.append(TextSendMessage(
+                text='若需繼續查詢，請直接輸入文字或號碼，輸入-1可隨機搜尋本子。'))
+
             line_bot_api.reply_message(
                 event.reply_token,
                 reply_arr
@@ -107,7 +110,9 @@ def show(event):
         reply_arr.append(TextSendMessage(
             text='標籤搜尋:\n若輸入文字，會搜尋名稱為該文字的標籤，並列出25個有此標籤的本子。\n\n範例:\n輸入「paizuri」，會列出25本標籤中包含「paizuri」的本子\n\n備註:目前僅支援輸入的語言為英文，中文部分尚未完善'))
         reply_arr.append(TextSendMessage(
-            text='本子搜尋:\n若輸入數字，會搜尋號碼為該數字的本子，並列出與其相關的資訊。\n\n範例:\n輸入「335974」，會搜尋335974這個本子，並列出標題、原作、角色、標籤、作者、語言、類型，頁數等資訊'))
+            text='本子搜尋:\n若輸入數字，會搜尋號碼為該數字的本子，並列出與其相關的資訊。\n\n範例:\n輸入「335974」，會搜尋335974這個本子，並列出網址、封面圖片、標題、原作、角色、標籤、作者、語言、類型，頁數等資訊'))
+        reply_arr.append(TextSendMessage(
+            text='隨機搜尋:\n若輸入-1，會隨機搜尋一個本子，並列出其相關資訊。\n\n備註:目前尚未實裝篩選系統，尚無法依條件篩選'))
 
         line_bot_api.reply_message(
             event.reply_token,
