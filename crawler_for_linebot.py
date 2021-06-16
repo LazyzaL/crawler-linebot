@@ -134,6 +134,11 @@ class tag:
         for title in html.find_all('div', 'caption'):
             urllist.insert(i*2+1, title.text + '$%^&')
             i += 1
-        print(urllist)
-        return(str(urllist).replace('[', '').replace(
-            ']', '').replace(', ', '\n').replace('\'', '').replace('$%^&', '\n'))
+        # return(str(urllist).replace('[', '', 1).replace(
+        #    ']', '').replace(', ', '\n').replace('\'', '').replace('$%^&', '\n'))
+        return(', '.join(urllist).replace(', ', '\n').replace('$%^&', '\n'))
+
+
+n = tag('paizuri')
+n.checkConnection()
+n.getInfo()
