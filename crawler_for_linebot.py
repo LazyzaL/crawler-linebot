@@ -132,8 +132,3 @@ class tag:
 
         return(str(urllist).replace('[', '').replace(
             ']', '').replace(', ', '\n').replace('\'', ''))
-
-
-n = tag('paizuri')
-n.checkConnection()
-n.getInfo()
