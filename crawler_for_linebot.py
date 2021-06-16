@@ -132,13 +132,8 @@ class tag:
 
         i = 0
         for title in html.find_all('div', 'caption'):
-            urllist.insert(i*2+1, title.text + '\n')
+            urllist.insert(i*2+1, title.text + '$%^&')
             i += 1
         print(urllist)
         return(str(urllist).replace('[', '').replace(
-            ']', '').replace(', ', '\n').replace('\'', ''))
-
-
-n = tag('paizuri')
-n.checkConnection()
-n.getInfo()
+            ']', '').replace(', ', '\n').replace('\'', '').replace('$%^&', '\n'))
