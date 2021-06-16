@@ -109,9 +109,31 @@ class tag:
         headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36'
         }
-        self.url = "https://nhentai.net/tag/" + self.name + "/"
+        self.url = "https://nhentai.net/tag/" + self.tag + "/"
         resp = requests.get(self.url, headers)
         if resp.status_code == 200:
             return True
         else:
             return False
+
+    def getInfo(self):
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36'
+        }
+        req = ur.Request(self.url, headers=headers)
+        html = soup(ur.urlopen(req).read().decode('utf-8'), "html.parser")
+
+        urllist = []
+
+        for url in html.find_all('a'):
+            l = list(url.get('href'))
+            if len(l) >= 3 and l[1] == 'g' and l[2] == '/':
+                urllist.append('https://nhentai.net' + url.get('href'))
+
+        return(str(urllist).replace('[', '').replace(
+            ']', '').replace(', ', '\n').replace('\'', ''))
+
+
+n = tag('paizuri')
+n.checkConnection()
+n.getInfo()

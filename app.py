@@ -89,10 +89,22 @@ def show(event):
 
     def tagsearch():
         hentai = crawler_for_linebot.tag(event.message.text)
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text='hi')
-        )
+
+        reply_arr = []
+
+        if hentai.checkConnection() == False:
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(
+                    text='查無此標籤:' + event.message.text + '。\n請重新輸入')
+            )
+        else:
+            reply_arr.append(TextSendMessage(
+                text=hentai.getInfo()))
+            line_bot_api.reply_message(
+                event.reply_token,
+                reply_arr
+            )
 
     if str(event.message.text).isdigit():
         booksearch()
