@@ -89,7 +89,7 @@ def show(event):
             line_bot_api.reply_message(
                 event.reply_token,
                 TextSendMessage(
-                    text='查無此標籤，亦無此本子:' + event.message.text + '。\n請確認輸入是否正確，並重新輸入，如果要隨機產生本子，輸入-1即可')
+                    text='查無此標籤，亦無此本子: ' + event.message.text + '。\n請確認輸入是否正確，並重新輸入，如果要隨機產生本子，輸入-1即可')
             )
         else:
             reply_arr.append(TextSendMessage(
@@ -108,11 +108,11 @@ def show(event):
         reply_arr.append(TextSendMessage(
             text='歡迎使用nhentai爬蟲機器人\n根據輸入為文字或數字，會自動搜尋標籤或本子'))
         reply_arr.append(TextSendMessage(
-            text='標籤搜尋:\n若輸入文字，會搜尋名稱為該文字的標籤，並列出25個有此標籤的本子。\n\n範例:\n輸入「paizuri」，會列出25本標籤中包含「paizuri」的本子\n\n備註:目前僅支援輸入的語言為英文，中文部分尚未完善'))
+            text='標籤搜尋:\n若輸入文字，會搜尋名稱為該文字的標籤，並列出25個有此標籤的本子。\n\n範例:\n輸入「paizuri」，會列出25本標籤中包含「paizuri」的本子\n\n支援搜尋多個標籤，只需以空格分隔各個標籤即可，亦支援限定語言。\n\n範例:\n輸入「paizuri stockings chinese」，會列出25本標籤中包含「paizuri」與「stockings」，語言為「中文」的本子\n\n備註:目前僅支援輸入的語言為英文，中文部分尚未完善'))
         reply_arr.append(TextSendMessage(
             text='本子搜尋:\n若輸入數字，會搜尋號碼為該數字的本子，並列出與其相關的資訊。\n\n範例:\n輸入「335974」，會搜尋335974這個本子，並列出網址、封面圖片、標題、原作、角色、標籤、作者、語言、類型，頁數等資訊'))
         reply_arr.append(TextSendMessage(
-            text='隨機搜尋:\n若輸入-1，會隨機搜尋一個本子，並列出其相關資訊。\n\n備註:目前尚未實裝篩選系統，尚無法依條件篩選'))
+            text='隨機搜尋:\n若輸入-1，會隨機搜尋一個本子，並列出其相關資訊。\n\n備註:目前尚未實裝篩選系統，尚無法依條件篩選隨機之結果'))
 
         line_bot_api.reply_message(
             event.reply_token,

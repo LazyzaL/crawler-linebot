@@ -105,11 +105,11 @@ class tag:
         self.url = ""
 
     def checkConnection(self):
-        self.tag = str(self.tag).replace(' ', '-')
+        self.tag = self.tag.replace(' ', '+')
         headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36'
         }
-        self.url = "https://nhentai.net/tag/" + self.tag + "/"
+        self.url = "https://nhentai.net/search/?q=" + self.tag
         resp = requests.get(self.url, headers)
         if resp.status_code == 200:
             return True
@@ -138,6 +138,6 @@ class tag:
         return(', '.join(urllist).replace(', ', '\n').replace('$%^&', '\n'))
 
 
-n = tag('paizuri')
-n.checkConnection()
-n.getInfo()
+# n = tag('paizuri chinese')
+# n.checkConnection()
+# n.getInfo()
