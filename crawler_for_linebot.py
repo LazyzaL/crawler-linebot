@@ -135,7 +135,10 @@ class tag:
             urllist.insert(i*2+1, title.text + '$%^&')
             i += 1
 
-        return(', '.join(urllist).replace(', ', '\n').replace('$%^&', '\n'))
+        if urllist == []:
+            return('無搜尋結果')
+        else:
+            return(', '.join(urllist).replace(', ', '\n').replace('$%^&', '\n'))
 
 
 # n = tag('paizuri chinese')
