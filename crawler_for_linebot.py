@@ -109,7 +109,7 @@ class tag:
         headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36'
         }
-        self.url = "https://nhentai.net/search/?q=" + self.tag
+        self.url = "https://nhentai.net/search/?q=" + self.tag + '&sort=popular-today'
         resp = requests.get(self.url, headers)
         if resp.status_code == 200:
             return True

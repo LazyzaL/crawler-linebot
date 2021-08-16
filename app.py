@@ -106,11 +106,13 @@ def show(event):
         reply_arr = []
 
         reply_arr.append(TextSendMessage(
-            text='歡迎使用nhentai爬蟲機器人\n根據輸入為文字或數字，會自動搜尋標籤或本子'))
+            text='歡迎使用nhentai爬蟲機器人\n根據輸入為文字或數字，會自動搜尋標籤或本子\n更新紀錄可以透過輸入「更新紀錄」查看'))
         reply_arr.append(TextSendMessage(
-            text='標籤搜尋:\n若輸入文字，會搜尋名稱為該文字的標籤，並列出25個有此標籤的本子。\n\n範例:\n輸入「paizuri」，會列出25本標籤中包含「paizuri」的本子\n\n支援搜尋多個標籤，只需以空格分隔各個標籤即可，亦支援限定語言。\n\n範例:\n輸入「paizuri stockings chinese」，會列出25本標籤中包含「paizuri」與「stockings」，語言為「中文」的本子\n\n備註:目前僅支援輸入的語言為英文，中文部分尚未完善'))
+            text='標籤搜尋:\n若輸入文字，會搜尋與該文字相關之本子，並列出至多25個今日熱門的結果。\n\n範例:\n輸入「paizuri」，會列出25本與「paizuri」相關之今日最熱門的本子\n\n支援搜尋多個標籤，只需以空格分隔各個標籤即可，亦支援限定語言。\n\n範例:\n輸入「paizuri stockings chinese」，會列出25本與「paizuri」與「stockings」相關，語言為「中文」的本子'))
         reply_arr.append(TextSendMessage(
             text='本子搜尋:\n若輸入數字，會搜尋號碼為該數字的本子，並列出與其相關的資訊。\n\n範例:\n輸入「335974」，會搜尋335974這個本子，並列出網址、封面圖片、標題、原作、角色、標籤、作者、語言、類型，頁數等資訊'))
+        reply_arr.append(TextSendMessage(
+            text='☆全新功能☆\n\n本月推薦:\n顧名思義，輸入「本月推薦」，會列出5~15本我個人推薦的本子，僅列出網址，部分標籤及頁數，每月10號更新一次。\n\n備註：因為我記憶力不是很好，所以如果發現沒有更新，可以透過點擊「建議與反饋」，從聯絡資訊告知我'))
         reply_arr.append(TextSendMessage(
             text='隨機搜尋:\n若輸入-1，會隨機搜尋一個本子，並列出其相關資訊。\n\n備註:目前尚未實裝篩選系統，尚無法依條件篩選隨機之結果'))
 
@@ -126,6 +128,35 @@ def show(event):
             text='感謝您使用這個機器人，若有任何建議或回饋，可透過下方資訊聯絡我。'))
         reply_arr.append(TextSendMessage(
             text='聯絡資訊:\n\nDiscord: Lazy#3082\nInstagram: i_am_lazy_boy_\nmail: machael1209@gmail.com'))
+
+        line_bot_api.reply_message(
+            event.reply_token,
+            reply_arr
+        )
+
+    if event.message.text == '本月推薦':
+        reply_arr = []
+
+        reply_arr.append(TextSendMessage(
+            text='\
+https://nhentai.net/g/369484/\n巨乳 女學生制服 中出\n98頁\n\n\
+https://nhentai.net/g/368990/\n只有一個女性 只有一個男性 絲襪\n24頁\n\n\
+https://nhentai.net/g/261701/\n絲襪 乳交 女性主導 女僕\n18頁\n\n\
+https://nhentai.net/g/235772/\n只有一個女性 只有一個男性\n20頁\n\n\
+https://nhentai.net/g/369043/\n絲襪 女僕\n20頁\n\n\
+https://nhentai.net/g/369407/\n辣妹 女學生制服 女性主導\n20頁\n\n\
+https://nhentai.net/g/359173/\n群交 只有一個男性\n76頁\n\n'))
+
+        line_bot_api.reply_message(
+            event.reply_token,
+            reply_arr
+        )
+
+    if event.message.text == '更新紀錄':
+        reply_arr = []
+
+        reply_arr.append(TextSendMessage(
+            text='更新紀錄：\n\n2021/8/16 18:00\n新增「本月推薦」功能，新增「更新紀錄」功能，修改「使用說明」部分內容'))
 
         line_bot_api.reply_message(
             event.reply_token,
