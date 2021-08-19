@@ -160,29 +160,17 @@ https://nhentai.net/g/359173/\n群交 只有一個男性\n76頁\n\n'))
         reply_arr.append(TextSendMessage(
             text='更新紀錄：\n\n\
 2021/08/16 18:00\n1.新增「本月推薦」功能\n2.新增「更新紀錄」功能\n3.修改「使用說明」部分內容\n\n\
-2021/08/19 11:50\n1.修改「使用說明」部分內容\n2.解決輸入文字的語言為中文時，機器人不回應的問題，但仍無法以中文搜尋'))
+2021/08/19 12:00\n1.修改「使用說明」部分內容'))
 
         line_bot_api.reply_message(
             event.reply_token,
             reply_arr
         )
-    if str(event.message.text).isalnum():
-        if str(event.message.text).isdigit() or event.message.text == '-1':
-            booksearch()
-        else:
-            tagsearch()
+
+    if str(event.message.text).isdigit() or event.message.text == '-1':
+        booksearch()
     else:
-        reply_arr = []
-
-        reply_arr.append(TextSendMessage(
-            text='目前尚無法以中文搜尋。'))
-        reply_arr.append(TextSendMessage(
-            text='若需繼續查詢，請直接輸入文字或號碼，輸入-1可隨機搜尋本子。'))
-
-        line_bot_api.reply_message(
-            event.reply_token,
-            reply_arr
-        )
+        tagsearch()
 
 
 if __name__ == "__main__":
