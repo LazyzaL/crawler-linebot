@@ -1,3 +1,5 @@
+# coding=utf-8
+
 # 歡迎使用這個LINE Bot
 # 進入LINE應用程式，於官方帳號頁面搜尋
 # @717dfpbz
@@ -106,9 +108,9 @@ def show(event):
         reply_arr = []
 
         reply_arr.append(TextSendMessage(
-            text='歡迎使用nhentai爬蟲機器人\n根據輸入為文字或數字，會自動搜尋標籤或本子\n更新紀錄可以透過輸入「更新紀錄」查看'))
+            text='歡迎使用nhentai爬蟲機器人\n根據輸入為文字或數字，會自動搜尋標籤或本子\n\n更新紀錄可以透過輸入「更新紀錄」查看'))
         reply_arr.append(TextSendMessage(
-            text='標籤搜尋:\n若輸入文字，會搜尋與該文字相關之本子，並列出至多25個今日熱門的結果。\n\n範例:\n輸入「paizuri」，會列出25本與「paizuri」相關之今日最熱門的本子\n\n支援搜尋多個標籤，只需以空格分隔各個標籤即可，亦支援限定語言。\n\n範例:\n輸入「paizuri stockings chinese」，會列出25本與「paizuri」與「stockings」相關，語言為「中文」的本子'))
+            text='關鍵字搜尋:\n若輸入文字，會搜尋與該文字相關之本子，並列出至多25個今日熱門的結果。\n\n範例:\n輸入「paizuri」，會列出25本與「paizuri」相關之今日最熱門的本子\n\n支援搜尋多個標籤，只需以空格分隔各個標籤即可，亦支援限定語言。\n\n範例:\n輸入「paizuri stockings chinese」，會列出25本與「paizuri」與「stockings」相關，語言為「中文」的本子\n\n備註：目前尚無法以中文搜尋'))
         reply_arr.append(TextSendMessage(
             text='本子搜尋:\n若輸入數字，會搜尋號碼為該數字的本子，並列出與其相關的資訊。\n\n範例:\n輸入「335974」，會搜尋335974這個本子，並列出網址、封面圖片、標題、原作、角色、標籤、作者、語言、類型，頁數等資訊'))
         reply_arr.append(TextSendMessage(
@@ -156,17 +158,31 @@ https://nhentai.net/g/359173/\n群交 只有一個男性\n76頁\n\n'))
         reply_arr = []
 
         reply_arr.append(TextSendMessage(
-            text='更新紀錄：\n\n2021/8/16 18:00\n新增「本月推薦」功能，新增「更新紀錄」功能，修改「使用說明」部分內容'))
+            text='更新紀錄：\n\n\
+2021/08/16 18:00\n1.新增「本月推薦」功能\n2.新增「更新紀錄」功能\n3.修改「使用說明」部分內容\n\n\
+2021/08/19 11:50\n1.修改「使用說明」部分內容\n2.解決輸入文字的語言為中文時，機器人不回應的問題，但仍無法以中文搜尋'))
 
         line_bot_api.reply_message(
             event.reply_token,
             reply_arr
         )
-
-    if str(event.message.text).isdigit() or event.message.text == '-1':
-        booksearch()
+    if str(event.message.text).isalnum():
+        if str(event.message.text).isdigit() or event.message.text == '-1':
+            booksearch()
+        else:
+            tagsearch()
     else:
-        tagsearch()
+        reply_arr = []
+
+        reply_arr.append(TextSendMessage(
+            text='目前尚無法以中文搜尋。'))
+        reply_arr.append(TextSendMessage(
+            text='若需繼續查詢，請直接輸入文字或號碼，輸入-1可隨機搜尋本子。'))
+
+        line_bot_api.reply_message(
+            event.reply_token,
+            reply_arr
+        )
 
 
 if __name__ == "__main__":
