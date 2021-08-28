@@ -128,7 +128,7 @@ def show(event):
         reply_arr.append(TextSendMessage(
             text='感謝您使用這個機器人，若有任何建議或回饋，可透過下方資訊聯絡我。'))
         reply_arr.append(TextSendMessage(
-            text='聯絡資訊:\n\nDiscord: Lazy#3082\nInstagram: i_am_lazy_boy_/diligent_meme\nmail: machael1209@gmail.com'))
+            text='聯絡資訊:\n\nDiscord: Lazy#3082\nInstagram: i_am_lazy_boy_/diligent_meme\nmail: machael1209@gmail.com/twitter: diligent_meme'))
 
         line_bot_api.reply_message(
             event.reply_token,
