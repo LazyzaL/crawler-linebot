@@ -145,7 +145,7 @@ https://nhentai.net/g/368990/\n只有一個女性 只有一個男性 絲襪\n24�
 https://nhentai.net/g/261701/\n絲襪 乳交 女性主導 女僕\n18頁\n\n\
 https://nhentai.net/g/235772/\n只有一個女性 只有一個男性\n20頁\n\n\
 https://nhentai.net/g/369043/\n絲襪 女僕\n20頁\n\n\
-https://nhentai.net/g/369407/\n辣妹 女學生制服 女性主導\n20頁\n\n\
+https://nhentai.net/g/de369407/\n辣妹 女學生制服 女性主導\n20頁\n\n\
 https://nhentai.net/g/359173/\n群交 只有一個男性\n76頁\n\n'))
 
         line_bot_api.reply_message(
