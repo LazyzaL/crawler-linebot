@@ -4,7 +4,6 @@
 # 進入LINE應用程式，於官方帳號頁面搜尋
 # @717dfpbz
 # @也必須輸入
-from __future__ import unicode_literals
 from flask import Flask, request, abort
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
@@ -129,7 +128,7 @@ def show(event):
         reply_arr.append(TextSendMessage(
             text='感謝您使用這個機器人，若有任何建議或回饋，可透過下方資訊聯絡我。'))
         reply_arr.append(TextSendMessage(
-            text='聯絡資訊:\n\nDiscord: Lazy#3082\nInstagram: i_am_lazy_boy_\nmail: machael1209@gmail.com'))
+            text='聯絡資訊:\n\nDiscord: Lazy#3082\nInstagram: i_am_lazy_boy_/diligent_meme\nmail: machael1209@gmail.com'))
 
         line_bot_api.reply_message(
             event.reply_token,
