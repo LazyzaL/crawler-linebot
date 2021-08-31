@@ -60,20 +60,14 @@ def show(event):
             else:
                 reply_arr.append(TextSendMessage(
                     text='https://nhentai.net/g/' + hentai.name + '/'))
+
+                res = hentai.getInfo()
+
                 reply_arr.append(ImageSendMessage(
-                    original_content_url=hentai.getInfo()[0],
-                    preview_image_url=hentai.getInfo()[0]))
+                    original_content_url=res[0],
+                    preview_image_url=res[0]))
                 reply_arr.append(TextSendMessage(
-                    text='***若欄位為空白，表示網站亦無該資訊***\n\n主標題(Main Title):\n{}\n\n副標題(Sub Title):\n{}\n\n原作(Parodies):\n{}\n\n角色(Characters):\n{}\n\n標籤(Tags):\n{}\n\n作者(Artists):\n{}\n\n語言(Languages):\n{}\n\n本子類型(Catogories):\n{}\n\n頁數(Pages):\n{}'.format(
-                        hentai.getInfo()[1],
-                        hentai.getInfo()[2],
-                        hentai.getInfo()[3],
-                        hentai.getInfo()[4],
-                        hentai.getInfo()[5],
-                        hentai.getInfo()[6],
-                        hentai.getInfo()[7],
-                        hentai.getInfo()[8],
-                        hentai.getInfo()[9])))
+                    text=f'***若欄位為空白，表示網站亦無該資訊***\n\n主標題(Main Title):\n{res[1]}\n\n副標題(Sub Title):\n{res[2]}\n\n原作(Parodies):\n{res[3]}\n\n角色(Characters):\n{res[4]}\n\n標籤(Tags):\n{res[5]}\n\n作者(Artists):\n{res[6]}\n\n語言(Languages):\n{res[7]}\n\n本子類型(Catogories):\n{res[8]}\n\n頁數(Pages):\n{res[9]}'))
                 reply_arr.append(TextSendMessage(
                     text='若需繼續查詢，請直接輸入文字或號碼，輸入-1可隨機搜尋本子。'))
                 line_bot_api.reply_message(
