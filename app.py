@@ -164,15 +164,6 @@ def show(event):
         reply_arr.append(
             TextSendMessage(
                 text=(
-                    '本月推薦:\n'
-                    '顧名思義，輸入「本月推薦」，會列出5~15本我個人推薦的本子，僅列出網址、標題部分標籤及頁數，每月10號更新一次，絕對主觀。\n\n'
-                    '備註：因為我記憶力不是很好，所以如果發現沒有更新，可以透過點擊「建議與反饋」，從聯絡資訊告知我'
-                )
-            )
-        )
-        reply_arr.append(
-            TextSendMessage(
-                text=(
                     '隨機搜尋:\n'
                     '若輸入-1，會隨機搜尋一個本子，並列出其相關資訊。\n\n'
                     '備註:目前尚未實裝篩選系統，尚無法依條件篩選隨機之結果'
@@ -209,29 +200,6 @@ def show(event):
             reply_arr
         )
 
-    if event.message.text == '本月推薦':
-        reply_arr = []
-
-        reply_arr.append(
-            TextSendMessage(
-                text=(
-                    'https://nhentai.net/g/371714/\n就算侵犯老師也沒關係吧\n女學生制服 女性主導 病嬌\n22頁\n\n'
-                    'https://nhentai.net/g/372157/\nギャルに停まります|Next Stop: Gal\n只有一個女性 只有一個男性 巨乳\n43頁\n\n'
-                    'https://nhentai.net/g/372273/\n想得到你的愛撫 已迫不及待\n中出 單行本 破處 手淫 比基尼 馬尾\n220頁\n\n'
-                    'https://nhentai.net/g/372161/\n波に惑って\n只有一個女性 巨乳 泳衣 比基尼\n26頁\n\n'
-                    'https://nhentai.net/g/347492/\n魅魔同居生活 總集篇\n巨乳 眼鏡 乳交 女學生制服\n150頁\n\n'
-                    'https://nhentai.net/g/346330/\n先生と奪われ特訓\n巨乳 口交 泳衣 老師 女性主導\n29頁\n\n'
-                    'https://nhentai.net/g/356237/\nアヤマチコマチ\n只有一個女性 只有一個男性\n30頁\n\n'
-                    'https://nhentai.net/g/372275/\nあなた様専用ソープ嬢エリコ\n只有一個女性 只有一個男性 女惡魔\n34頁'
-                )
-            )
-        )
-
-        line_bot_api.reply_message(
-            event.reply_token,
-            reply_arr
-        )
-
     if event.message.text == '更新紀錄':
         reply_arr = []
 
@@ -240,7 +208,8 @@ def show(event):
                 text=(
                     '更新紀錄：\n\n'
                     '2021/08/16 18:00\n1.新增「本月推薦」功能\n2.新增「更新紀錄」功能\n3.修改「使用說明」部分內容\n\n'
-                    '2021/08/19 12:00\n1.修改「使用說明」部分內容'
+                    '2021/08/19 12:00\n1.修改「使用說明」部分內容\n\n'
+                    '2021/10/13 02:30\n1.刪除「本月推薦」功能\n2.重大告知，未來將不會有重大更新'
                 )
             )
         )
