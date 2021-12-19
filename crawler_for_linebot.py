@@ -1,6 +1,7 @@
 import urllib.request as ur
 import requests
 import random
+import re
 from bs4 import BeautifulSoup as soup
 import translate
 
@@ -81,22 +82,22 @@ class book:
 
         pages = html.find_all('span', 'tags')[7].find('span', 'name').text
 
+        def string_replace(txt):
+            txt = re.sub("[][ ']", "", str(txt))
+            txt = txt.replace(',', '\n')
+            return(txt)
+
         return [cover,
-                main_title,
-                sub_title,
-                str(parodies).replace(
-                    '[', '').replace(']', '').replace(', ', '\n').replace('\'', ''),
-                str(characters).replace(
-                    '[', '').replace(']', '').replace(', ', '\n').replace('\'', ''),
-                str(tags).replace(
-                    '[', '').replace(']', '').replace(', ', '\n').replace('\'', ''),
-                str(artists).replace(
-                    '[', '').replace(']', '').replace(', ', '\n').replace('\'', ''),
-                str(languages).replace(
-                    '[', '').replace(']', '').replace(', ', '\n').replace('\'', ''),
-                str(catogories).replace(
-                    '[', '').replace(']', '').replace(', ', '\n').replace('\'', ''),
-                pages]
+            main_title,
+            sub_title,
+            string_replace(parodies),
+            string_replace(characters),
+            re.sub("[][']", "", str(tags)),
+            string_replace(artists),
+            string_replace(languages),
+            string_replace(catogories),
+            pages
+        ]
 
 
 class tag:
